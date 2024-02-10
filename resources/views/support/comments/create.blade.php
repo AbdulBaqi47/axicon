@@ -1,0 +1,47 @@
+@extends('layouts.layout-2')
+
+
+@section('styles')
+
+    <!-- Title -->
+    <title>Axiquo | Comment - Create</title>
+
+@endsection
+
+@section('content')
+
+    <h4 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-1 mb-3">
+        <div>Support<span class="text-muted font-weight-light"> / Comment / Create</span></div>
+        <a class="btn btn-secondary btn-round d-block" href='/support/{{ $ticket->id }}'>
+        <span class="ion ion-md-undo"></span>&nbsp; Return</a>
+    </h4>
+
+    <div class="card mb-4">
+        <h6 class="card-header">
+            Create Comment
+        </h6>
+        <div class="card-body">
+            {!! Form::open(['action' => 'CommentController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+                
+                <div class="form-group">
+                    <label class="form-label">Title</label>
+                    {{ Form::text('title', '', ['class' => 'form-control', 'required']) }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    {{ Form::textarea('message', '', ['class' => 'form-control', 'rows' => '3', 'required']) }}
+                    <small class="form-text text-muted">Outline your support request so our team can help you.</small>
+                </div>
+            
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    {{ Form::select('priority', ['Low' => 'Low', 'Medium' => 'Medium', 'High' => 'High'], null, ['class' => 'custom-select', 'placeholder' => 'Select ticket priority...', 'required']) }}
+                </div>
+
+                {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+@endsection
